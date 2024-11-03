@@ -45,6 +45,14 @@ export function Score({ scores, turn }: ScoreProps) {
                 ))}
               </Table.Row>
             ))}
+          <Table.Row key="total">
+            <Table.Cell>Total</Table.Cell>
+            {names.map((name) => (
+              <Table.Cell key={name}>
+                {scores[name].reduce((partialSum, a) => partialSum + a, 0)}
+              </Table.Cell>
+            ))}
+          </Table.Row>
         </Table.Body>
       </Table.Root>
     </Box>

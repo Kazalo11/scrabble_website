@@ -23,6 +23,7 @@ export function Game() {
       </Stack>
       <Stack align="center">
         <Turn
+          key={turnNumber}
           names={names}
           turn={turnNumber}
           scores={scores}

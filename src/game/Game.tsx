@@ -1,13 +1,15 @@
 import { Button, Heading, List, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Results } from "../types";
+import { Score } from "./Score";
 import { Turn } from "./Turn";
 
 export function Game() {
   const location = useLocation();
   const { names } = location.state || { names: [] };
 
-  const [scores, setScores] = useState<{ [name: string]: number[] }>({});
+  const [scores, setScores] = useState<Results>({});
   const [turnNumber, setTurnNumber] = useState(1);
 
   return (
@@ -31,6 +33,7 @@ export function Game() {
         />
         <Button onClick={() => setTurnNumber(turnNumber + 1)}>End turn</Button>
       </Stack>
+      <Score scores={scores} />
     </>
   );
 }

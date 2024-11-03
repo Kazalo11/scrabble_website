@@ -3,12 +3,13 @@ import {
   NumberInputField,
   NumberInputRoot,
 } from "../components/ui/number-input";
+import { Results } from "../types";
 
 type TurnProps = {
   turn: number;
   names: string[];
   scores: { [name: string]: number[] };
-  setScores: React.Dispatch<React.SetStateAction<{ [name: string]: number[] }>>;
+  setScores: React.Dispatch<React.SetStateAction<Results>>;
 };
 
 export function Turn({ turn, names, scores, setScores }: TurnProps) {

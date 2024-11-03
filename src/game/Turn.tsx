@@ -15,7 +15,12 @@ type TurnProps = {
 export function Turn({ turn, names, scores, setScores }: TurnProps) {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, name: string) => {
     const updatedScores = { ...scores };
-    updatedScores[name][turn] = e.target.valueAsNumber;
+    const score = Number(e.target.value);
+    if (updatedScores[name]?.length < turn - 1) {
+      updatedScores[name].push(score);
+    } else {
+      updatedScores[name][turn - 1] = score;
+    }
     setScores(updatedScores);
   };
   return (
@@ -25,7 +30,7 @@ export function Turn({ turn, names, scores, setScores }: TurnProps) {
         {names.map((name, index) => (
           <VStack key={index} align="center" padding="2px">
             <Text>{` ${name}, please enter your score`}</Text>
-            <NumberInputRoot defaultValue="0">
+            <NumberInputRoot defaultValue="0" min={0}>
               <NumberInputField onBlur={(e) => handleBlur(e, name)} />
             </NumberInputRoot>
           </VStack>

@@ -8,9 +8,23 @@ import { Turn } from "./Turn";
 export function Game() {
   const location = useLocation();
   const { names } = location.state || { names: [] };
-
-  const [scores, setScores] = useState<Results>({});
   const [turnNumber, setTurnNumber] = useState(1);
+
+  const createInitialScores = (names: string[]) => {
+    return names.reduce(
+      (acc, name) => {
+        acc[name] = [];
+        return acc;
+      },
+      {} as { [name: string]: number[] }
+    );
+  };
+
+  const endTurn = () => {
+    setTurnNumber(turnNumber + 1);
+  };
+
+  const [scores, setScores] = useState<Results>(createInitialScores(names));
 
   return (
     <>
@@ -31,9 +45,9 @@ export function Game() {
           scores={scores}
           setScores={setScores}
         />
-        <Button onClick={() => setTurnNumber(turnNumber + 1)}>End turn</Button>
+        <Button onClick={endTurn}>End turn</Button>
       </Stack>
-      <Score scores={scores} />
+      <Score key={turnNumber} scores={scores} turn={turnNumber} />
     </>
   );
 }

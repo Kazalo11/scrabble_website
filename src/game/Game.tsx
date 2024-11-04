@@ -51,3 +51,5 @@ export function Game() {
     </>
   );
 }
+//TODO: Add in the ability to edit previous scores
+//TODO: Store the word entered
